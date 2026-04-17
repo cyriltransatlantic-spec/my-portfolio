@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth *)",
+      "Bash(where gh *)",
+      "Read(//c/Program Files/GitHub CLI/**)",
+      "Read(//c/Program Files/GitHub CLI//**)",
+      "Read(//c/Users/cyril/**)",
+      "Bash(/c/Program Files/GitHub CLI/gh.exe auth *)"
+    ]
+  }
+}
