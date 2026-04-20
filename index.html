@@ -12,12 +12,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --accent:   #E05A2B;
-      --text:     #111111;
-      --muted:    #6b7280;
-      --border:   #e5e7eb;
-      --bg-light: #f9fafb;
-      --white:    #ffffff;
+      --accent:   #38bdf8;
+      --accent2:  #818cf8;
+      --text:     #e2e8f0;
+      --muted:    #94a3b8;
+      --border:   #1e293b;
+      --bg-light: #0f172a;
+      --white:    #0a0f1e;
+      --card-bg:  #0d1526;
       --radius:   10px;
       --nav-h:    64px;
     }
@@ -28,6 +30,9 @@
       font-family: 'Inter', sans-serif;
       color: var(--text);
       background: var(--white);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(56,189,248,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(129,140,248,0.07) 0%, transparent 60%);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -92,9 +97,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(10,15,30,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       height: var(--nav-h);
     }
@@ -133,7 +138,7 @@
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--text);
-      background: var(--bg-light);
+      background: rgba(56,189,248,0.08);
     }
 
     .nav-links a.active { color: var(--accent); }
@@ -143,16 +148,16 @@
       font-size: 0.875rem;
       font-weight: 600;
       padding: 0.5rem 1.1rem;
-      border: 1.5px solid var(--text);
+      border: 1.5px solid var(--accent);
       border-radius: 7px;
-      color: var(--text);
+      color: var(--accent);
       background: transparent;
       cursor: pointer;
       transition: background 0.2s, color 0.2s, border-color 0.2s;
       white-space: nowrap;
     }
     .btn-cv:hover {
-      background: var(--text);
+      background: var(--accent);
       color: var(--white);
     }
 
@@ -174,7 +179,7 @@
       display: block;
       width: 22px;
       height: 2px;
-      background: var(--text);
+      background: var(--accent);
       border-radius: 2px;
       transition: transform 0.25s, opacity 0.25s;
     }
@@ -194,7 +199,7 @@
       position: fixed;
       top: var(--nav-h);
       left: 0; right: 0;
-      background: var(--white);
+      background: rgba(10,15,30,0.97);
       border-bottom: 1px solid var(--border);
       padding: 1rem 1.5rem 1.5rem;
       z-index: 99;
@@ -246,7 +251,7 @@
       display: block;
       width: 24px;
       height: 2px;
-      background: var(--accent);
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
       border-radius: 2px;
     }
 
@@ -282,8 +287,8 @@
       font-size: 0.9rem;
       font-weight: 600;
       padding: 0.7rem 1.5rem;
-      background: var(--accent);
-      color: var(--white);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0a0f1e;
       border: none;
       border-radius: 7px;
       cursor: pointer;
@@ -305,8 +310,8 @@
       display: inline-block;
     }
     .btn-secondary:hover {
-      border-color: var(--text);
-      background: var(--bg-light);
+      border-color: var(--accent);
+      background: rgba(56,189,248,0.06);
     }
 
     /* ══════════════════════════════════════════════════════════
@@ -334,11 +339,12 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: box-shadow 0.25s, transform 0.25s;
-      background: var(--white);
+      transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+      background: var(--card-bg);
     }
     .project-card:hover {
-      box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+      box-shadow: 0 8px 40px rgba(56,189,248,0.12);
+      border-color: rgba(56,189,248,0.3);
       transform: translateY(-3px);
     }
 
@@ -360,12 +366,49 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f3f4f6;
+      background: #0d1a2e;
     }
     .project-thumb-placeholder svg {
       width: 40px;
       height: 40px;
       color: #d1d5db;
+    }
+
+    /* Logo thumbnail */
+    .project-logo-thumb {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .project-logo-mark {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    /* Clickable card — cover-link pattern */
+    .project-card { position: relative; }
+    .card-cover-link {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: var(--radius);
+    }
+    .project-card-link:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+      transform: translateY(-3px);
+    }
+    .project-card .btn-card {
+      position: relative;
+      z-index: 2;
     }
 
     /* "Built with Claude Code" badge */
@@ -377,8 +420,8 @@
       font-weight: 600;
       letter-spacing: 0.04em;
       color: var(--accent);
-      background: rgba(224,90,43,0.1);
-      border: 1px solid rgba(224,90,43,0.25);
+      background: rgba(56,189,248,0.1);
+      border: 1px solid rgba(56,189,248,0.25);
       padding: 3px 8px;
       border-radius: 99px;
       white-space: nowrap;
@@ -424,9 +467,9 @@
       font-weight: 500;
       padding: 3px 9px;
       border-radius: 99px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      background: var(--bg-light);
+      border: 1px solid rgba(56,189,248,0.2);
+      color: var(--accent);
+      background: rgba(56,189,248,0.07);
     }
 
     .project-actions {
@@ -445,13 +488,12 @@
       white-space: nowrap;
     }
     .btn-card-primary {
-      background: var(--text);
-      color: var(--white);
-      border: 1.5px solid var(--text);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0a0f1e;
+      border: none;
     }
     .btn-card-primary:hover {
-      background: #333;
-      border-color: #333;
+      opacity: 0.85;
     }
     .btn-card-secondary {
       background: transparent;
@@ -459,15 +501,15 @@
       border: 1.5px solid var(--border);
     }
     .btn-card-secondary:hover {
-      border-color: var(--text);
-      background: var(--bg-light);
+      border-color: var(--accent);
+      background: rgba(56,189,248,0.06);
     }
 
     /* ══════════════════════════════════════════════════════════
        SKILLS
     ══════════════════════════════════════════════════════════ */
     #skills {
-      background: var(--white);
+      background: transparent;
       border-bottom: 1px solid var(--border);
     }
 
@@ -486,6 +528,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 1.5rem;
+      background: var(--card-bg);
     }
 
     .skill-group-title {
@@ -521,14 +564,14 @@
       padding: 5px 12px;
       border-radius: 99px;
       border: 1px solid var(--border);
-      color: var(--text);
-      background: var(--bg-light);
+      color: var(--muted);
+      background: rgba(15,23,42,0.6);
       cursor: default;
       transition: background 0.2s, border-color 0.2s, color 0.2s;
     }
     .skill-pill:hover {
-      background: rgba(224,90,43,0.07);
-      border-color: rgba(224,90,43,0.35);
+      background: rgba(56,189,248,0.08);
+      border-color: rgba(56,189,248,0.35);
       color: var(--accent);
     }
 
@@ -572,6 +615,7 @@
       border-radius: var(--radius);
       padding: 1.25rem 1rem;
       text-align: center;
+      background: var(--card-bg);
       transition: border-color 0.2s;
     }
     .stat-card:hover { border-color: var(--accent); }
@@ -627,11 +671,12 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       min-width: 260px;
+      background: var(--card-bg);
       transition: border-color 0.2s, background 0.2s;
     }
     .contact-link:hover {
       border-color: var(--accent);
-      background: rgba(224,90,43,0.04);
+      background: rgba(56,189,248,0.06);
       color: var(--accent);
     }
     .contact-link svg {
@@ -667,6 +712,242 @@
       font-weight: 600;
     }
     .footer-built a:hover { text-decoration: underline; }
+
+    /* ══════════════════════════════════════════════════════════
+       CHAT WIDGET — OVERLAY
+    ══════════════════════════════════════════════════════════ */
+    #chat-toggle {
+      position: fixed;
+      bottom: 1.75rem;
+      right: 1.75rem;
+      z-index: 400;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 1.1rem 0 0.9rem;
+      height: 46px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.855rem;
+      font-weight: 600;
+      color: #0a0f1e;
+      box-shadow: 0 4px 24px rgba(56,189,248,0.38);
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+    #chat-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 32px rgba(56,189,248,0.5);
+    }
+    #chat-toggle svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+    #chat-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 398;
+      background: rgba(6, 10, 22, 0.78);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+    #chat-backdrop.open { opacity: 1; pointer-events: all; }
+
+    #chat-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 399;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      pointer-events: none;
+    }
+
+    #chat-panel {
+      width: min(500px, 100%);
+      height: min(620px, calc(100vh - 2rem));
+      background: #0b1628;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.65), 0 0 0 1px rgba(56,189,248,0.07);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.93) translateY(20px);
+      opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.34,1.36,0.64,1), opacity 0.25s ease;
+      pointer-events: none;
+    }
+    #chat-panel.open {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .chat-header {
+      position: relative;
+      padding: 1.1rem 1.1rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+      background: linear-gradient(180deg, rgba(56,189,248,0.06) 0%, transparent 100%);
+    }
+    .chat-header-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 20px 20px 0 0;
+    }
+    .chat-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chat-header-info { display: flex; align-items: center; gap: 0.7rem; }
+    .chat-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 800; color: #0a0f1e;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(56,189,248,0.18);
+    }
+    .chat-header-title { font-size: 0.92rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .chat-header-sub { font-size: 0.7rem; color: var(--accent); font-weight: 500; margin-top: 2px; }
+    .chat-close {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer; color: var(--muted);
+      padding: 6px; border-radius: 8px;
+      display: flex; transition: color 0.2s, background 0.2s;
+    }
+    .chat-close:hover { color: var(--text); background: rgba(255,255,255,0.1); }
+    .chat-close svg { width: 14px; height: 14px; }
+
+    .chat-messages {
+      flex: 1; overflow-y: auto;
+      padding: 1.25rem;
+      display: flex; flex-direction: column; gap: 0.9rem;
+      scroll-behavior: smooth;
+    }
+    .chat-messages::-webkit-scrollbar { width: 3px; }
+    .chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+    .chat-welcome {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 0.4rem; padding-bottom: 0.5rem;
+    }
+    .chat-welcome-emoji { font-size: 1.75rem; line-height: 1; }
+    .chat-welcome-heading { font-size: 1rem; font-weight: 700; color: var(--text); margin-top: 0.25rem; }
+    .chat-welcome-sub { font-size: 0.82rem; color: var(--muted); line-height: 1.55; max-width: 320px; }
+
+    .chat-starters {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.5rem; margin-top: 0.75rem; width: 100%;
+    }
+    .chat-starter {
+      font-size: 0.78rem; font-weight: 500;
+      padding: 0.65rem 0.8rem;
+      border-radius: 10px;
+      border: 1px solid rgba(56,189,248,0.15);
+      color: var(--text);
+      background: rgba(56,189,248,0.04);
+      cursor: pointer; text-align: left; line-height: 1.4;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+    .chat-starter:hover {
+      background: rgba(56,189,248,0.1);
+      border-color: rgba(56,189,248,0.32);
+      transform: translateY(-1px);
+    }
+
+    .chat-msg { display: flex; flex-direction: column; max-width: 82%; }
+    .chat-msg.user { align-self: flex-end; align-items: flex-end; }
+    .chat-msg.assistant { align-self: flex-start; align-items: flex-start; }
+
+    .chat-bubble {
+      padding: 0.65rem 0.95rem;
+      border-radius: 16px;
+      font-size: 0.875rem; line-height: 1.6;
+    }
+    .chat-msg.user .chat-bubble {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0a0f1e; font-weight: 500;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-msg.assistant .chat-bubble {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-typing-wrap { align-self: flex-start; }
+    .chat-typing {
+      display: flex; gap: 5px; align-items: center;
+      padding: 0.65rem 0.95rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; border-bottom-left-radius: 4px;
+    }
+    .chat-typing span {
+      width: 6px; height: 6px;
+      background: var(--muted); border-radius: 50%;
+      animation: typing-bounce 1.3s infinite;
+    }
+    .chat-typing span:nth-child(2) { animation-delay: 0.18s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.36s; }
+    @keyframes typing-bounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+      30% { transform: translateY(-6px); opacity: 1; }
+    }
+
+    .chat-footer {
+      padding: 0.85rem 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      background: rgba(0,0,0,0.12);
+      display: flex; gap: 0.5rem; flex-shrink: 0;
+    }
+    #chat-input {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.875rem; color: var(--text);
+      font-family: inherit; resize: none; outline: none;
+      transition: border-color 0.2s;
+      line-height: 1.45; min-height: 38px; max-height: 100px;
+    }
+    #chat-input::placeholder { color: var(--muted); }
+    #chat-input:focus { border-color: rgba(56,189,248,0.4); }
+
+    #chat-send {
+      width: 38px; height: 38px;
+      align-self: flex-end;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    #chat-send:hover { opacity: 0.85; transform: translateY(-1px); }
+    #chat-send:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+    #chat-send svg { width: 15px; height: 15px; color: #0a0f1e; }
+
+    @media (max-width: 540px) {
+      .chat-starters { grid-template-columns: 1fr; }
+      #chat-toggle .chat-toggle-label { display: none; }
+      #chat-toggle { padding: 0 0.9rem; }
+    }
   </style>
 </head>
 <body>
@@ -680,9 +961,9 @@
 
     <nav aria-label="Main navigation">
       <ul class="nav-links" id="navLinks">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#skills">Skills</a></li>
         <li><a href="#about">About</a></li>
+        <li><a href="#work">AI Tools</a></li>
+        <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -698,9 +979,9 @@
 <!-- Mobile nav drawer -->
 <div class="nav-mobile" id="navMobile" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
   <ul>
-    <li><a href="#work"    class="mobile-link">Work</a></li>
-    <li><a href="#skills"  class="mobile-link">Skills</a></li>
     <li><a href="#about"   class="mobile-link">About</a></li>
+    <li><a href="#work"    class="mobile-link">AI Tools</a></li>
+    <li><a href="#skills"  class="mobile-link">Skills</a></li>
     <li><a href="#contact" class="mobile-link">Contact</a></li>
   </ul>
   <a href="CVMillot.pdf" download="CVMillot.pdf" class="btn-primary" style="width:100%;text-align:center;display:block;">Download CV</a>
@@ -729,15 +1010,42 @@
 
 
 <!-- ══════════════════════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════════════════════ -->
+<section id="about" aria-labelledby="aboutHeading">
+  <div class="container">
+    <span class="section-label fade-up">About</span>
+    <h2 class="section-title fade-up delay-1" id="aboutHeading">Reducing friction between people and systems.</h2>
+
+    <div class="about-grid">
+      <div class="about-bio fade-up delay-1">
+        <p>
+          I'm a <strong>Transformation & Change PM</strong> with a Specialized Master's in Innovation & Transformation Management from CentraleSupélec (top 3 engineering school in France), a Global BBA from ESSEC Business School, and an exchange year at UC Berkeley focused on innovation and change management. Available from May 15th.
+        </p>
+        <p>
+          Over nearly two years as a Transformation Consultant in the <strong>Innovation & Technology Division at Crédit Agricole CIB</strong>, I drove business and IT transformation initiatives — redesigning processes, leading market research across fintech and deep tech, and translating complex requirements into clear scopes and value propositions for senior stakeholders.
+        </p>
+        <p>
+          I work at the intersection where <strong>operational reality meets technical capability</strong>: I understand how business teams think under pressure, and I can hold a technical conversation without needing things simplified. That combination is what lets me cut through the friction that slows transformation down.
+        </p>
+        <p>
+          Bilingual French/English, conversational in Spanish, and genuinely excited about <strong>AI-driven transformation</strong> — I use tools like Claude, Gemini, and Copilot as part of how I work, not just topics I present on.
+        </p>
+      </div>
+
+      <div class="stats-grid fade-up delay-2" id="statsGrid"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
      PROJECTS
 ══════════════════════════════════════════════════════════ -->
 <section id="work" aria-labelledby="workHeading">
   <div class="container">
-    <span class="section-label fade-up">Selected work</span>
-    <h2 class="section-title fade-up delay-1" id="workHeading">Projects that reduced friction.</h2>
-    <p class="fade-up delay-2" style="color:var(--muted);max-width:520px;font-size:0.95rem;line-height:1.7;">
-      Each project started with a team spending too much time on something that should have been faster, clearer, or more automated.
-    </p>
+    <span class="section-label fade-up">AI Built tools</span>
+    <h2 class="section-title fade-up delay-1" id="workHeading">AI Built tools.</h2>
 
     <!-- Project grid is rendered by JS -->
     <div class="projects-grid" id="projectsGrid"></div>
@@ -757,36 +1065,6 @@
     </p>
 
     <div class="skills-grid" id="skillsGrid"></div>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════════════════════
-     ABOUT
-══════════════════════════════════════════════════════════ -->
-<section id="about" aria-labelledby="aboutHeading">
-  <div class="container">
-    <span class="section-label fade-up">About</span>
-    <h2 class="section-title fade-up delay-1" id="aboutHeading">Reducing friction between people and systems.</h2>
-
-    <div class="about-grid">
-      <div class="about-bio fade-up delay-1">
-        <p>
-          I'm a <strong>Transformation & Change PM</strong> currently completing a Specialized Master's in Innovation & Transformation Management at CentraleSupélec (top 3 engineering school in France), after a Global BBA at ESSEC Business School and an exchange year at UC Berkeley focused on innovation and change management.
-        </p>
-        <p>
-          Over nearly two years as a Transformation Consultant in the <strong>Innovation & Technology Division at Crédit Agricole CIB</strong>, I drove business and IT transformation initiatives — redesigning processes, leading market research across fintech and deep tech, and translating complex requirements into clear scopes and value propositions for senior stakeholders.
-        </p>
-        <p>
-          I work at the intersection where <strong>operational reality meets technical capability</strong>: I understand how business teams think under pressure, and I can hold a technical conversation without needing things simplified. That combination is what lets me cut through the friction that slows transformation down.
-        </p>
-        <p>
-          Bilingual French/English, conversational in Spanish, and genuinely excited about <strong>AI-driven transformation</strong> — I use tools like Claude, Gemini, and Copilot as part of how I work, not just topics I present on.
-        </p>
-      </div>
-
-      <div class="stats-grid fade-up delay-2" id="statsGrid"></div>
-    </div>
   </div>
 </section>
 
@@ -821,6 +1099,52 @@
 
 
 <!-- ══════════════════════════════════════════════════════════
+     CHAT WIDGET
+══════════════════════════════════════════════════════════ -->
+<button id="chat-toggle" aria-label="Open portfolio assistant" aria-expanded="false" aria-controls="chat-panel">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+  <span class="chat-toggle-label">Ask about Cyril</span>
+</button>
+
+<div id="chat-backdrop" aria-hidden="true"></div>
+
+<div id="chat-modal" aria-hidden="true">
+  <div id="chat-panel" role="dialog" aria-modal="true" aria-label="Portfolio assistant">
+    <div class="chat-header">
+      <div class="chat-header-bar"></div>
+      <div class="chat-header-inner">
+        <div class="chat-header-info">
+          <div class="chat-avatar" aria-hidden="true">CM</div>
+          <div>
+            <div class="chat-header-title">Portfolio Assistant</div>
+            <div class="chat-header-sub">Powered by Claude AI</div>
+          </div>
+        </div>
+        <button class="chat-close" id="chat-close-btn" aria-label="Close assistant">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-label="Chat messages"></div>
+
+    <div class="chat-footer">
+      <textarea id="chat-input" placeholder="Ask anything about Cyril…" rows="1" aria-label="Your message"></textarea>
+      <button id="chat-send" aria-label="Send message" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
      DATA & LOGIC
 ══════════════════════════════════════════════════════════ -->
 <script>
@@ -829,41 +1153,24 @@
 ───────────────────────────────────────────────────────── */
 const PROJECTS = [
   {
-    name: "Startup Onboarding Process Redesign",
-    description: "End-to-end redesign of CA-CIB's startup onboarding workflow, coordinating Legal, Risk, and Operations to eliminate bottlenecks and cut time-to-onboard.",
-    problem: "Startups were stalling in a fragmented multi-team process — no single owner, no standard templates, no clear handoffs.",
-    tools: ["Process Mapping", "Cross-functional coordination", "Template design", "PowerPoint", "Excel", "Workshop facilitation"],
-    liveUrl: "#",
-    detailsUrl: "#",
-    // Replace src with a real screenshot path or URL, e.g. "assets/project1.png"
-    thumb: null
-  },
-  {
-    name: "Fintech & Deep Tech Market Intelligence",
-    description: "Led 12+ market research projects across Quantum, Blockchain, BaaS, Capital Markets, KYC tech, and Online Marketplaces — surfacing trends and key players for senior leadership.",
-    problem: "The Innovation division had no structured way to assess emerging tech landscapes; decision-makers were flying blind on where to invest attention.",
-    tools: ["Market research", "Competitive analysis", "Stakeholder presentations", "Excel", "PowerPoint"],
-    liveUrl: "#",
-    detailsUrl: "#",
-    thumb: null
-  },
-  {
-    name: "AI Use Case Mapping — Internal Departments",
-    description: "Audited workflows across Customer Service, Accounting, Marketing, and the CEO's office at Laticrete to identify high-value AI tool adoption opportunities.",
-    problem: "Leadership knew AI could help but had no structured view of where it would create the most leverage across the business.",
-    tools: ["AI tools audit", "Process interviews", "Use case design", "Claude", "Gemini", "Copilot"],
-    liveUrl: "#",
-    detailsUrl: "#",
-    thumb: null
-  },
-  {
     name: "Finlyze — AI Statement Analyser",
     description: "Browser-based tool that reads a PDF or CSV bank statement and returns instant AI-powered analysis: spending by category, a transaction table, donut chart, and personalised saving tips. No manual data entry — Claude parses the PDF directly.",
-    problem: "Most people have no idea where their money goes each month. Pulling numbers out of a bank statement PDF is tedious and error-prone — Finlyze eliminates that step entirely.",
+    problem: null,
     tools: ["Claude API", "PDF parsing", "Vercel Serverless", "Chart.js", "Vanilla JS", "REST API design"],
-    liveUrl: "#",
-    detailsUrl: "#",
-    thumb: null
+    liveUrl: "https://finlyze.vercel.app",
+    detailsUrl: null,
+    thumb: null,
+    logo: { initials: "Fz", gradient: "linear-gradient(135deg, #39ff7e, #00cfff)", textColor: "#080b12", bg: "#080b12" }
+  },
+  {
+    name: "IntelBrief — Industry Intelligence",
+    description: "Industry report generating tool that identifies key trends, players, and recent funding. Identified companies can be saved and tracked.",
+    problem: null,
+    tools: ["Claude API", "Next.js", "Vercel Serverless", "Perplexity API", "TypeScript", "REST API design"],
+    liveUrl: "https://intel-brief.vercel.app",
+    detailsUrl: null,
+    thumb: null,
+    logo: { initials: "IB", gradient: "linear-gradient(135deg, #1D4ED8, #3B82F6)", textColor: "#ffffff", bg: "#0F172A" }
   }
 ];
 
@@ -944,32 +1251,47 @@ const CONTACT_LINKS = [
 function renderProjects() {
   const grid = document.getElementById('projectsGrid');
   grid.innerHTML = PROJECTS.map((p, i) => {
-    const thumb = p.thumb
-      ? `<img src="${p.thumb}" alt="${p.name} screenshot" loading="lazy" />`
-      : `<div class="project-thumb-placeholder" aria-hidden="true">
-           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-             <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-             <path d="m21 15-5-5L5 21"/>
-           </svg>
-         </div>`;
+    let thumbContent;
+    if (p.thumb) {
+      thumbContent = `<img src="${p.thumb}" alt="${p.name} screenshot" loading="lazy" />`;
+    } else if (p.logo) {
+      thumbContent = `
+        <div class="project-logo-thumb" style="background:${p.logo.bg};" aria-hidden="true">
+          <div class="project-logo-mark" style="background:${p.logo.gradient};color:${p.logo.textColor};">${p.logo.initials}</div>
+        </div>`;
+    } else {
+      thumbContent = `
+        <div class="project-thumb-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-5-5L5 21"/>
+          </svg>
+        </div>`;
+    }
 
     const pills = p.tools.map(t => `<span class="pill">${t}</span>`).join('');
 
+    const coverLink = p.liveUrl
+      ? `<a class="card-cover-link" href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open ${p.name}"></a>`
+      : '';
+
+    const openBtn = p.liveUrl
+      ? `<div class="project-actions"><span class="btn-card btn-card-primary">Open app &rarr;</span></div>`
+      : '';
+
     return `
-      <article class="project-card fade-up delay-${(i % 3) + 1}" aria-label="${p.name}">
+      <article class="project-card${p.liveUrl ? ' project-card-link' : ''} fade-up delay-${(i % 3) + 1}" aria-label="${p.name}">
+        ${coverLink}
         <div class="project-thumb">
-          ${thumb}
+          ${thumbContent}
           <span class="claude-badge" aria-label="Built with Claude Code">Built with Claude Code</span>
         </div>
         <div class="project-body">
           <h3 class="project-name">${p.name}</h3>
           <p class="project-desc">${p.description}</p>
-          <p class="project-problem">${p.problem}</p>
+          ${p.problem ? `<p class="project-problem">${p.problem}</p>` : ''}
           <div class="pills" aria-label="Tools used">${pills}</div>
-          <div class="project-actions">
-            <a href="${p.liveUrl}" class="btn-card btn-card-primary" aria-label="See ${p.name} live">See it live &rarr;</a>
-            <a href="${p.detailsUrl}" class="btn-card btn-card-secondary" aria-label="View details for ${p.name}">View details &rarr;</a>
-          </div>
+          ${openBtn}
         </div>
       </article>`;
   }).join('');
@@ -1031,7 +1353,7 @@ document.querySelectorAll('.mobile-link').forEach(link => {
    ACTIVE NAV ON SCROLL
 ───────────────────────────────────────────────────────── */
 function updateActiveNav() {
-  const sections = ['hero', 'work', 'skills', 'about', 'contact'];
+  const sections = ['hero', 'about', 'work', 'skills', 'contact'];
   const navLinks = document.querySelectorAll('.nav-links a');
   const scrollY = window.scrollY + 100;
 
@@ -1085,6 +1407,153 @@ setTimeout(() => {
     el.classList.add('visible');
   });
 }, 80);
+
+/* ─────────────────────────────────────────────────────────
+   CHAT WIDGET
+───────────────────────────────────────────────────────── */
+(function () {
+  const toggle   = document.getElementById('chat-toggle');
+  const backdrop = document.getElementById('chat-backdrop');
+  const modal    = document.getElementById('chat-modal');
+  const panel    = document.getElementById('chat-panel');
+  const closeBtn = document.getElementById('chat-close-btn');
+  const messages = document.getElementById('chat-messages');
+  const input    = document.getElementById('chat-input');
+  const sendBtn  = document.getElementById('chat-send');
+
+  const STARTERS = [
+    "What's Cyril's background?",
+    "What did he do at CACIB?",
+    "When is he available?",
+    "What roles is he targeting?",
+    "Tell me about his thesis",
+    "What are his key skills?"
+  ];
+
+  let history = [];
+  let isOpen  = false;
+  let loading = false;
+
+  function openChat() {
+    isOpen = true;
+    backdrop.classList.add('open');
+    panel.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    if (messages.children.length === 0) renderWelcome();
+    setTimeout(() => input.focus(), 300);
+  }
+
+  function closeChat() {
+    isOpen = false;
+    backdrop.classList.remove('open');
+    panel.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    toggle.focus();
+  }
+
+  toggle.addEventListener('click', () => isOpen ? closeChat() : openChat());
+  closeBtn.addEventListener('click', closeChat);
+  backdrop.addEventListener('click', closeChat);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) closeChat(); });
+
+  function renderWelcome() {
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `
+      <div class="chat-welcome">
+        <div class="chat-welcome-emoji">👋</div>
+        <div class="chat-welcome-heading">Hi, I'm Cyril's assistant</div>
+        <div class="chat-welcome-sub">Ask me anything about his experience, skills, or what he's looking for.</div>
+        <div class="chat-starters">
+          ${STARTERS.map(s => `<button class="chat-starter">${s}</button>`).join('')}
+        </div>
+      </div>`;
+    messages.appendChild(wrap);
+    wrap.querySelectorAll('.chat-starter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        wrap.remove();
+        sendMessage(btn.textContent);
+      });
+    });
+  }
+
+  function addMessage(role, text) {
+    const div = document.createElement('div');
+    div.className = `chat-msg ${role}`;
+    div.innerHTML = `<div class="chat-bubble">${escapeHtml(text).replace(/\n/g, '<br>')}</div>`;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'chat-typing-wrap';
+    div.id = 'chat-typing-indicator';
+    div.innerHTML = `<div class="chat-typing"><span></span><span></span><span></span></div>`;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function hideTyping() {
+    document.getElementById('chat-typing-indicator')?.remove();
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  async function sendMessage(text) {
+    if (loading || !text.trim()) return;
+    loading = true;
+    sendBtn.disabled = true;
+    input.value = '';
+    autoResize();
+
+    addMessage('user', text);
+    showTyping();
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ message: text, history })
+      });
+      const data = await res.json();
+      hideTyping();
+      if (!res.ok || data.error) throw new Error(data.error || 'Request failed');
+      addMessage('assistant', data.reply);
+      history.push({ role: 'user', content: text });
+      history.push({ role: 'assistant', content: data.reply });
+      if (history.length > 20) history = history.slice(-20);
+    } catch {
+      hideTyping();
+      addMessage('assistant', 'Sorry, something went wrong. Please try again or reach out at Cyrilmillot01@gmail.com.');
+    }
+
+    loading = false;
+    sendBtn.disabled = false;
+    input.focus();
+  }
+
+  sendBtn.addEventListener('click', () => sendMessage(input.value));
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(input.value); }
+  });
+
+  input.addEventListener('input', () => {
+    sendBtn.disabled = !input.value.trim();
+    autoResize();
+  });
+
+  function autoResize() {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 100) + 'px';
+  }
+})();
 </script>
 </body>
 </html>
