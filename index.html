@@ -1276,7 +1276,7 @@ function renderProjects() {
       : '';
 
     const openBtn = p.liveUrl
-      ? `<div class="project-actions"><span class="btn-card btn-card-primary">Open app &rarr;</span></div>`
+      ? `<div class="project-actions"><a class="btn-card btn-card-primary" href="${p.liveUrl}" target="_blank" rel="noopener noreferrer">Open app &rarr;</a></div>`
       : '';
 
     return `
