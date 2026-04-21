@@ -49,7 +49,7 @@ Technical: Power BI, Microsoft Excel, PowerPoint, Claude API automation, Gemini,
 Languages: French (Native), English (Native), Spanish (B2)
 
 ## WHAT CYRIL IS LOOKING FOR
-Roles at the intersection of business and technology — transformation consulting, product management, innovation, or strategy in a FinTech or financial services context. Open to roles in Paris or remote. Available from May 15th 2025.
+Roles at the intersection of business and technology — transformation consulting, product management, innovation, or strategy in a FinTech or financial services context. Open to roles in Paris or remote. Available from May 15th 2026.
 
 ## CONTACT
 For CVs, interviews, or more details: Cyrilmillot01@gmail.com | 07 44 47 6185`;
