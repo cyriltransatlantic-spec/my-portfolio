@@ -1128,6 +1128,34 @@
       0%   { opacity: 0.5; transform: translate(-50%, -50%) scale(0.75); }
       100% { opacity: 0;   transform: translate(-50%, -50%) scale(2.2); }
     }
+
+    /* ══════════════════════════════════════════════════════════
+       HORIZONTAL CENTERING
+    ══════════════════════════════════════════════════════════ */
+    .section-label { display: block; text-align: center; }
+    .section-title { text-align: center; }
+
+    /* Hero */
+    .hero-eyebrow  { justify-content: center; }
+    .hero-heading  { text-align: center; margin-left: auto; margin-right: auto; }
+    .hero-sub      { text-align: center; margin-left: auto; margin-right: auto; }
+    .hero-ctas     { justify-content: center; }
+
+    /* About — collapse to single centered column */
+    .about-grid { grid-template-columns: 1fr; }
+    .about-bio  { text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; }
+
+    /* Skills subtitle */
+    #skills .container > p { text-align: center; margin-left: auto; margin-right: auto; }
+
+    /* Skill groups */
+    .skill-group-title { justify-content: center; }
+    .skill-pills       { justify-content: center; }
+
+    /* Project cards */
+    .project-name, .project-desc, .project-problem { text-align: center; }
+    .pills         { justify-content: center; }
+    .project-actions { justify-content: center; }
   </style>
 </head>
 <body>
